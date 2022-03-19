@@ -1,0 +1,1 @@
+print(f"package的名稱{__name__}")
