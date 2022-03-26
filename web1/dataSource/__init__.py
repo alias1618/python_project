@@ -56,6 +56,18 @@ def select_countries_tasks(conn):
     return countries
 
 
+def select_countries_tasks(conn):
+    cursor = conn.cursor()
+    sqlString = """
+    SELECT  DISTINCT country
+    FROM city
+    ORDER BY country
+    """
+    cursor.execute(sqlString)
+    countries = cursor.fetchall()
+    return countries
+
+
 def get_countries():
     conn = create_connection('citys.db')
     if conn is not None:
