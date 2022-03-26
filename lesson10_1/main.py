@@ -3,4 +3,7 @@
 from tools import weather
 
 if __name__ == "__main__":
-    weather.get_weather_of_taiwan()
+    weatherlist = weather.get_weather_of_taiwan()
+    if weatherlist is not None:
+        for item in weatherlist:
+            print(item)
