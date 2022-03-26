@@ -1,5 +1,6 @@
 from flask import Flask
-from markupsafe import escape
+from flask import jsonify
+from flask import request
 import dataSource
 
 app = Flask(__name__)
@@ -8,22 +9,26 @@ app = Flask(__name__)
 def index():
     return 'Index Page'
 
-@app.route('/hello')
-def hello():
-    return 'Hello, World'
+#authorization = ""
+authorization = "CWB-82BFBBC6-50D9-40EE-9E28-8317814A2503"
 
-@app.route('/world')
-def world():
-    return "<h1>World</h>"
-
-@app.route('/user/<username>')
-def show_user_profile(username):
-    # show the user profile for that user
-    return f'使用者是:{escape(username)}'
-
-@app.route('/weather')
+@app.route("/weather")
 def show_weather():
-    return dataSource.get_weather_of_taiwan()
+
+    authName = request.args.get("Authorization")
+    if authName is None:
+        print("沒有Authorization")
+    else:
+        print(f"Authorization:{authName}")
+
+    format = request.args.get("format")
+    if format is None:
+        print("沒有format")
+    else:
+        print(f"format:{format}")
+
+    weatherList = dataSource.get_weather_of_taiwan()
+    return jsonify(weatherList)
 
 if __name__ == "__main__":
     app.run(debug=True)
