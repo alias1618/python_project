@@ -47,3 +47,12 @@ VALUES (?,?,?,?,?,?,?,?,?);'''
     cursor = conn.cursor()
     cursor.execute(insertSQL, data_list)
     conn.commit()
+
+def getlot(conn):
+    lotSQL = '''
+    SELECT *
+    FROM lot;
+    '''
+    cursor = conn.cursor()
+    cursor.execute(lotSQL)
+    return cursor.fetchall()
